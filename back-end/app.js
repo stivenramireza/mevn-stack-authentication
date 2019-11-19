@@ -7,7 +7,8 @@ import mongoose from 'mongoose';
 const app = express();
 
 // Connection to Database
-const uri = 'mongodb+srv://anutibara:anutibara@scraping-cluster-7dtgt.gcp.mongodb.net/udemy?retryWrites=true&w=majority';
+const uri = 'mongodb://localhost:27017/udemy';
+//const uri = 'mongodb+srv://anutibara:anutibara@scraping-cluster-7dtgt.gcp.mongodb.net/udemy?retryWrites=true&w=majority';
 
 const options = {
     useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api', require('./routes/grade'))
+app.use('/api', require('./routes/user'))
 
 // Middleware for Vue.js router history mode
 const history = require('connect-history-api-fallback');
