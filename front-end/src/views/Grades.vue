@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
     data() {
         return {
@@ -66,6 +68,9 @@ export default {
             updatedGrade: {}
         }
     },
+    computed: {
+        ...mapState(['token'])
+    },
     created() {
         this.listGrades();
     },
@@ -76,7 +81,12 @@ export default {
             this.showAlert(); 
         },
         listGrades(){
-            this.axios('/grade')
+            let config = {
+                headers: {
+                    token: this.token
+                }
+            }
+            this.axios('/grade', config)
             .then(res => {
                 console.log(res.data);
                 this.grades = res.data;
@@ -86,8 +96,12 @@ export default {
             })
         },
         addGrade(){
-            console.log(this.grade);
-            this.axios.post('/new-grade', this.grade)
+            let config = {
+                headers: {
+                    token: this.token
+                }
+            }
+            this.axios.post('/new-grade', this.grade, config)
             .then(res => {
                 this.grades.push(res.data)
                 this.grade.name = ''
@@ -97,7 +111,7 @@ export default {
                 this.showAlert()
             })
             .catch(e => {
-                console.log(e.response);
+                console.log(e);
                 if(e.response.data.error.errors.name.message){
                     this.message.text = e.response.data.error.errors.name.message
                 }else{
@@ -108,8 +122,12 @@ export default {
             })
         },
         deleteGrade(id){
-            console.log(id)
-            this.axios.delete(`/grade/${id}`)
+            let config = {
+                headers: {
+                    token: this.token
+                }
+            }
+            this.axios.delete(`/grade/${id}`, config)
                 .then(res => {
                     const index = this.grades.findIndex(item => item._id === res.data._id)
                     this.grades.splice(index, 1)
@@ -123,7 +141,6 @@ export default {
         },
         activateEdition(id){
             this.update = true;
-            console.log(id);
             this.axios.get(`/grade/${id}`)
                 .then(res => {
                     this.updatedGrade = res.data;
@@ -133,7 +150,12 @@ export default {
                 })
         },
         updateGrade(item){
-            this.axios.put(`/grade/${item._id}`, item)
+            let config = {
+                headers: {
+                    token: this.token
+                }
+            }
+            this.axios.put(`/grade/${item._id}`, item, config)
                 .then(res => {
                     const index = this.grades.findIndex(grade => grade._id === res.data._id);
                     this.grades[index].name = res.data.name;
