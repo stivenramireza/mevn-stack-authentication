@@ -3,6 +3,8 @@ const router = express.Router();
 
 import User from '../models/user';
 
+const { isUser, isAdmin } = require('../middlewares/auth')
+
 // Hash Password
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -32,7 +34,7 @@ router.post('/new-user', async(req, res) => {
 });
 
 // PUT
-router.put('/user/:id', async(req, res) => {
+router.put('/user/:id', [isUser, isAdmin], async(req, res) => {
     const _id = req.params.id;
     const body = _.pick(req.body, ['name', 'email', 'password', 'active']);
 
