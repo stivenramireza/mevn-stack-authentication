@@ -7,8 +7,8 @@ import mongoose from 'mongoose';
 const app = express();
 
 // Connection to Database
-const uri = 'mongodb://localhost:27017/udemy';
-//const uri = 'mongodb+srv://anutibara:anutibara@scraping-cluster-7dtgt.gcp.mongodb.net/udemy?retryWrites=true&w=majority';
+//const uri = 'mongodb://localhost:27017/udemy';
+const uri = 'mongodb+srv://anutibara:anutibara@scraping-cluster-7dtgt.gcp.mongodb.net/udemy?retryWrites=true&w=majority';
 
 const options = {
     useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
