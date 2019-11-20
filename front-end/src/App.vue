@@ -12,7 +12,7 @@
             <b-nav-item href="/">Home</b-nav-item>
             <b-nav-item href="/about">About</b-nav-item>
             <b-nav-item href="/login" v-if="!isActive">Login</b-nav-item>
-            <b-nav-item href="/grades" v-if="isActive">about</b-nav-item>
+            <b-nav-item href="/grades" v-if="isActive">Grades</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->

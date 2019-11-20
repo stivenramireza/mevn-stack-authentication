@@ -30,7 +30,6 @@ export default {
             this.axios.post('/login', this.user)
                 .then(res => {
                     console.log(res.data)
-                    this.message = null;
                     const token = res.data.token;
                     this.saveUser(token);
                 })

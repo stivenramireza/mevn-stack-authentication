@@ -10,6 +10,7 @@
             >
             {{message.text}}
         </b-alert>
+
         <form @submit.prevent="updateGrade(updatedGrade)" v-if="update">
             <h3>Update grade</h3>
             <input type="text" class="form-control my-2" 
@@ -19,6 +20,7 @@
             <b-button class="btn-warning my-2 mx-2" type="submit">Confirm</b-button>
             <b-button class="my-2" type="submit" @click="update = false">Cancel</b-button>
         </form>
+
         <form @submit.prevent="addGrade()" v-if="!update">
             <h3>Add new grade</h3>
             <input type="text" class="form-control my-2" 
@@ -27,6 +29,7 @@
                     placeholder="Description" v-model="grade.description">
             <b-button class="btn-success my-2 btn-block" type="submit">Add</b-button>
         </form>
+
         <table class="table">
             <thead>
                 <tr>
@@ -122,12 +125,7 @@ export default {
             })
         },
         deleteGrade(id){
-            let config = {
-                headers: {
-                    token: this.token
-                }
-            }
-            this.axios.delete(`/grade/${id}`, config)
+            this.axios.delete(`/grade/${id}`)
                 .then(res => {
                     const index = this.grades.findIndex(item => item._id === res.data._id)
                     this.grades.splice(index, 1)
@@ -150,12 +148,7 @@ export default {
                 })
         },
         updateGrade(item){
-            let config = {
-                headers: {
-                    token: this.token
-                }
-            }
-            this.axios.put(`/grade/${item._id}`, item, config)
+            this.axios.put(`/grade/${item._id}`, item)
                 .then(res => {
                     const index = this.grades.findIndex(grade => grade._id === res.data._id);
                     this.grades[index].name = res.data.name;
@@ -175,6 +168,6 @@ export default {
         showAlert() {
             this.dismissCountDown = this.dismissSecs
         }
-    },
+    }
 }
 </script>
