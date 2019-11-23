@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
-import store from '../store/index'
+import store from '../store/index';
 
 Vue.use(VueRouter)
 
@@ -37,13 +37,12 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const protectedRoute = to.matched.some(record => record.meta.requireAuth)
-
+  const protectedRoute = to.matched.some(record => record.meta.requireAuth);
   if(protectedRoute && store.state.token === ''){
-    next({name: 'login'});
+    next({ name: 'login' })
   }else{
     next();
   }
-});
+})
 
-export default router
+export default router;

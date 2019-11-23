@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const verifyAuth = (req, res, next) => {
-    const token = req.get('token')
+    const token = req.get('token');
     jwt.verify(token, 'secret', (err, decoded) => {
         if(err){
             return res.status(401).json({
@@ -15,7 +15,7 @@ const verifyAuth = (req, res, next) => {
 
 const verifyAdmin = (req, res, next) => {
     const role = req.user.role;
-    if(role == 'ADMIN'){
+    if(role === 'ADMIN'){
         next();
     }else{
         return res.status(401).json({
@@ -24,4 +24,4 @@ const verifyAdmin = (req, res, next) => {
     }
 }
 
-module.exports = {verifyAuth, verifyAdmin}
+module.exports = { verifyAuth, verifyAdmin }

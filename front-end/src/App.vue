@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <!-- Navbar -->
+    <!-- <div id="nav">
+      <router-link to="/">Home | </router-link>
+      <router-link to="/about">About | </router-link>
+      <router-link to="/login" v-if="!isActive">Login | </router-link>
+      <a @click="logout()" v-if="isActive">Sign Out | </a>
+      <router-link to="/grades" v-if="isActive">Grades</router-link>
+    </div> -->
     <div>
       <b-navbar toggleable="md" type="dark" variant="info">
         <b-navbar-brand href="#">NavBar</b-navbar-brand>
@@ -9,10 +15,10 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item href="/">Home</b-nav-item>
-            <b-nav-item href="/about">About</b-nav-item>
-            <b-nav-item href="/login" v-if="!isActive">Login</b-nav-item>
-            <b-nav-item href="/grades" v-if="isActive">Grades</b-nav-item>
+            <b-nav-item to="/">Home</b-nav-item>
+            <b-nav-item to="/about">About</b-nav-item>
+            <b-nav-item to="/login" v-if="!isActive">Login</b-nav-item>
+            <b-nav-item to="/grades" v-if="isActive">Grades</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->

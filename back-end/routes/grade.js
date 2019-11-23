@@ -4,13 +4,12 @@ const router = express.Router();
 // import Grade model
 import Grade from '../models/grade';
 
-const { verifyAuth, verifyAdmin } = require('../middlewares/auth')
+const { verifyAuth, verifyAdmin } = require('../middlewares/auth');
 
 // Add a grade
 router.post('/new-grade', verifyAuth, async(req, res) => {
     const body = req.body;
     body.userId = req.user._id;
-
     try {
        const gradeDB = await Grade.create(body);
        res.status(200).json(gradeDB);
@@ -40,7 +39,7 @@ router.get('/grade/:id', async(req, res) => {
 router.get('/grade', verifyAuth, async(req, res) => {
     const userId = req.user._id;
     try {
-        const gradesDB = await Grade.findOne({userId});
+        const gradesDB = await Grade.find({ userId });
         res.json(gradesDB);
     } catch (error) {
         return res.status(400).json({
