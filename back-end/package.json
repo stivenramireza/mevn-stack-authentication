@@ -33,7 +33,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.4",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
